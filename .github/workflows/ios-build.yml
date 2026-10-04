@@ -34,13 +34,15 @@ jobs:
         run: |
           [ -d ios ] || npx cap add ios
           npx cap sync ios
+          (cd ios/App && pod install)
+          ls ios/App/App.xcworkspace
 
       # ---------- Unsigned build (always runs, no Apple account needed) ----------
       - name: Archive (unsigned)
         working-directory: ios/App
         run: |
           xcodebuild archive \
-            -project App.xcodeproj \
+            -workspace App.xcworkspace \
             -scheme App \
             -configuration Release \
             -sdk iphoneos \
@@ -100,7 +102,7 @@ jobs:
         working-directory: ios/App
         run: |
           xcodebuild archive \
-            -project App.xcodeproj -scheme App -configuration Release -sdk iphoneos \
+            -workspace App.xcworkspace -scheme App -configuration Release -sdk iphoneos \
             -archivePath "$RUNNER_TEMP/Signed.xcarchive" \
             DEVELOPMENT_TEAM="$TEAM_ID" CODE_SIGN_STYLE=Manual \
             PROVISIONING_PROFILE_SPECIFIER="$PROFILE_NAME" CODE_SIGN_IDENTITY="Apple Distribution"
