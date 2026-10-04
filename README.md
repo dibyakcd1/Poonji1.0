@@ -89,3 +89,13 @@ Dev server starts at `http://localhost:3000`.
 - **No Apple account:** produces `Poonji-unsigned-ipa` (download from the run's Artifacts). Install via Sideloadly/AltStore.
 - **With Apple Developer account:** add these repo secrets for a signed IPA: `IOS_CERT_P12_BASE64`, `IOS_CERT_PASSWORD`, `IOS_PROFILE_BASE64`, `IOS_TEAM_ID` (optional `IOS_EXPORT_METHOD`, default `app-store-connect`). Add `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_KEY_P8` to auto-upload to TestFlight.
 - Bundle ID is `com.poonji.app` (edit `capacitor.config.json` to change).
+
+---
+
+## 🤖 7. Android App Build (GitHub Actions)
+
+`.github/workflows/android-build.yml` builds the Android app on every push to `main` (or manually from **Actions → Build Android App**).
+
+- **Always:** `Poonji-debug-apk` artifact — download the APK, open it on your phone and install (allow "install unknown apps").
+- **For Play Store / signed release:** create a keystore and add secrets `ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS`, `ANDROID_KEY_PASSWORD`. You then also get a signed `.apk` and `.aab` (`Poonji-release-signed`).
+- Package name is `com.poonji.app` (edit `capacitor.config.json` to change).
