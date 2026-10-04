@@ -79,3 +79,13 @@ npm install
 npm run dev
 ```
 Dev server starts at `http://localhost:3000`.
+
+---
+
+## 🍎 6. iOS App Build (GitHub Actions)
+
+`.github/workflows/ios-build.yml` builds the iOS app on a macOS runner (Capacitor wraps the web build) on every push to `main`, or manually from **Actions → Build iOS App → Run workflow**.
+
+- **No Apple account:** produces `Poonji-unsigned-ipa` (download from the run's Artifacts). Install via Sideloadly/AltStore.
+- **With Apple Developer account:** add these repo secrets for a signed IPA: `IOS_CERT_P12_BASE64`, `IOS_CERT_PASSWORD`, `IOS_PROFILE_BASE64`, `IOS_TEAM_ID` (optional `IOS_EXPORT_METHOD`, default `app-store-connect`). Add `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_KEY_P8` to auto-upload to TestFlight.
+- Bundle ID is `com.poonji.app` (edit `capacitor.config.json` to change).
